@@ -1,17 +1,37 @@
-from flask import Flask
+from flask import Flask, render_template
 from flask_cors import CORS
 from flask import jsonify
 from services.db import db
 
 # from routes.hello import *
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='',
+            static_folder='web',
+            template_folder='web')
 CORS(app)
 
 
+@app.route("/")
+def web():
+    return render_template("index.html")
+
+
 @app.route("/v1/most-used-modality/<fromage>/<toage>", methods=["GET"])
-def hello(fromage, toage):
-    db.execute(f"SELECT modalidad, COUNT(m.id) AS total FROM victima AS v INNER JOIN modalidad m ON v.modalidad_id = m.id WHERE v.edad > {fromage} AND v.edad < {toage} GROUP BY modalidad ORDER BY total DESC;")
+def modality(fromage, toage):
+    db.execute(
+        f'''SELECT modalidad, COUNT(m.id) AS total FROM victima AS v 
+        INNER JOIN modalidad m ON v.modalidad_id = m.id 
+        WHERE v.edad > {fromage} AND v.edad < {toage} GROUP BY modalidad ORDER BY total DESC;''')
+    myresult = db.fetchall()
+    return jsonify(myresult)
+
+
+@app.route("/v1/most-used-modality-per-neighborhood/<neighborhood>/<limit>", methods=["GET"])
+def neighborhood(neighborhood, limit):
+    db.execute(
+        f'''SELECT barrio, COUNT(b.id) AS total FROM victima AS v 
+        INNER JOIN barrio b ON v.barrio_id = b.id 
+        WHERE v.modalidad_id = {neighborhood}  GROUP BY barrio ORDER BY total DESC LIMIT {limit};''')
     myresult = db.fetchall()
     return jsonify(myresult)
 

@@ -21,7 +21,7 @@ const BarChart = () => {
             alert("La edad desde no puede ser mayor que la edad fin")
         } else {
             setLoading(true);
-            let getDatas = await fetch(`http://127.0.0.1:5000/v1/most-used-modality/${startAge}/${endAge}`, {
+            let getDatas = await fetch(`http://127.0.0.1:4000/v1/most-used-modality/${startAge}/${endAge}`, {
                 method: 'GET'
             });
             getDatas = await getDatas.json();
@@ -59,7 +59,7 @@ const BarChart = () => {
                         enabled: true
                     },
                     title: {
-                        text: 'Modalidad mas usada por filtro',
+                        text: 'Modalidad mas usada por filtro de edad',
                         align: 'left'
                     },
                     legend: {

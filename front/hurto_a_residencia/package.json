@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev -p 3001",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "build-static": "next build && next export"
   },
   "dependencies": {
     "apexcharts": "^3.29.0",
