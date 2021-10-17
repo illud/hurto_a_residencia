@@ -2,6 +2,7 @@ import React from 'react';
 import { Container, Row, Col } from "reactstrap";
 import BarChart from './BarChart';
 import TableSearch from './Table';
+import Thefts from './Thefts';
 
 
 const Statistics = () => {
@@ -17,6 +18,7 @@ const Statistics = () => {
                         </div>
                     </Col>
                 </Row>
+                <br></br>
                 <Row md={2} md={1}>
                     <Col >
                         <BarChart />
@@ -27,6 +29,12 @@ const Statistics = () => {
                                 <TableSearch />
                             </Col>
                         </Row>
+                    </Col>
+                </Row>
+                <br></br>
+                <Row md={2} md={1}>
+                    <Col >
+                        <Thefts />
                     </Col>
                 </Row>
             </Container>

@@ -36,7 +36,16 @@ def neighborhood(neighborhood, limit):
     return jsonify(myresult)
 
 
+@app.route("/v1/year-with-most-thefts", methods=["GET"])
+def thefts():
+    db.execute(
+        f'''SELECT fecha_echo, COUNT(v.fecha_echo) AS total FROM victima as v
+            GROUP BY DATE_FORMAT(fecha_echo, '%Y') ORDER BY total DESC limit 1;''')
+    myresult = db.fetchall()
+    return jsonify(myresult)
+
+
 # app.register_blueprint(hellor)
 # app.register_blueprint(helloNamer)
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=4000, use_reloader=True)
+    app.run(host='0.0.0.0', port=5000, use_reloader=True)
