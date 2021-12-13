@@ -5,10 +5,11 @@ const Thefts = () => {
     const [thefts, setthefts] = useState([]);
 
     const getDatas = async () => {
-        let getDatas = await fetch(`http://127.0.0.1:5000/v1/year-with-most-thefts`, {
+        let getDatas = await fetch(`http://127.0.0.1:5000/haras/v1/year-with-most-thefts`, {
             method: 'GET'
         });
         getDatas = await getDatas.json();
+        console.log(getDatas)
         setthefts(getDatas);
     }
 
@@ -19,7 +20,7 @@ const Thefts = () => {
         return () => {
 
         }
-    }, []);
+    }, [thefts]);
 
     return (
         <div>

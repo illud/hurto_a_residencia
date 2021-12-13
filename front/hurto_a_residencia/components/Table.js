@@ -7,7 +7,7 @@ const TableSearch = () => {
   const [datas, setDatas] = useState([]);
 
   const getDatas = async () => {
-    let getDatas = await fetch(`http://127.0.0.1:5000/v1/most-used-modality-per-neighborhood/${selected}/${limit}`, {
+    let getDatas = await fetch(`http://127.0.0.1:5000/haras/v1/most-used-modality-per-neighborhood/${selected}/${limit}`, {
       method: 'GET',
     });
     getDatas = await getDatas.json();
